@@ -38,15 +38,20 @@ def get_feature(wav_path, length=102000, random_start=False):
 
 
 def test_pred(model, filepath):
-    print('making test prediction')
     feature = get_feature(filepath, length=102800, random_start=True)
-    print(feature.shape)
     transfeat = feature[np.newaxis, ..., np.newaxis]
-    print(transfeat.shape)
     return model.predict(transfeat)
 
-start = time.time()
-output = test_pred(model, 'data/test/spoof_00002.wav')
-end = time.time()
-print(output)  # [human_score, spoof_score]
-print("Time elapsed {spent:.4f}".format(spent=end - start))
+
+def run_tests(items=['data/test/test_2s.wav']):
+    for item in items:
+        print("Making prediction on file {name}".format(name=item))
+        start = time.time()
+        output = test_pred(model, item)
+        end = time.time()
+        print('Human: {o[0][0]:.3f}\nAttack: {o[0][1]:.3f}\n'.format(o=output))  # [[human_score, spoof_score]]
+        print("Time elapsed {spent:.4f}\n\n".format(spent=end - start))
+    pass
+
+items = ['data/test/test_2s.wav', 'data/test/test_25s.wav', 'data/test/test_4s.wav', 'data/test/attack_19s.wav']
+run_tests(items)
