@@ -1,3 +1,3 @@
 
 
-# add sox
+# sudo apt-get install libsndfile1
