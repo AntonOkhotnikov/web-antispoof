@@ -39,16 +39,17 @@ model.summary()
 app = Flask(__name__)
 api = Api(app)
 
+
 class Prediction(Resource):
     def __init__(self):
         self._required_features = ['FILE_PATH']
         self.reqparse = reqparse.RequestParser()
         for feature in self._required_features:
             self.reqparse.add_argument(feature, 
-                                                                     type=str, 
-                                                                     required=True, 
-                                                                     location='json',
-                                                                     help = 'No {} provided'.format(feature))
+                                       type=str,
+                                       required=True,
+                                       location='json',
+                                       help = 'No {} provided'.format(feature))
         super(Prediction, self).__init__()
 
     def post(self):
@@ -62,7 +63,9 @@ class Prediction(Resource):
         return {'Human': "{o:.3f}".format(o=y_pred[0][0]),
                         'Attack': "{o:.3f}".format(o=y_pred[0][1])}
 
+
 api.add_resource(Prediction, '/predict')
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
