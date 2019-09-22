@@ -12,7 +12,7 @@ import numpy as np
 import random
 import time
 import io
-from urllib.request import urlopen
+from six.moves.urllib.request import urlopen
 
 sys.path.append(os.path.abspath("data/src"))
 from DftSpectrogram import DftSpectrogram
@@ -38,7 +38,7 @@ def get_feature(wav_path, length=102800, random_start=False):
 def get_feature_from_url(wav_path, length=102800, random_start=False):
     try:
         # x, sr = librosa.load(wav_path, sr=16000)
-        x, sr = sf.read(io.BytesIO(urlopen(url).read()))
+        x, sr = sf.read(io.BytesIO(urlopen(wav_path).read()), samplerate=16000)
         assert sr == 16000
         if length > len(x):
             x = np.concatenate([x] * int(np.ceil(length/len(x))))
