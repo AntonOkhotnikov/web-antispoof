@@ -13,7 +13,7 @@ COPY data /home/web-antispoof/data/
 WORKDIR /home/web-antispoof
 
 RUN pip install -r requirements.txt \
-    && conda install -c conda-forge libsndfile
+    && conda install -c conda-forge libsndfile pysoundfile audioread
 
 # create directory to store temporary audio files
 RUN mkdir /opt/audio
