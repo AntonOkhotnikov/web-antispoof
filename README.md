@@ -28,6 +28,24 @@ Web-service for antispoofing detection
     python3 inference.py
 ```
 
+## Build
+* Before building copy the model to `data/model`:
+```bash
+    cd web-antispoof/
+    ln -s <model> data/model/model.h5
+```
+
+* To build Docker image:
+```bash
+    docker build -t web-antispoof:latest .
+```
+
+## Deploy
+* To start bot-server we need to mount a folder to `/opt/audio` in container, where downloads will be stored:
+```bash
+    docker run -v <host_machine_path>:/opt/audio web-antispoof:latest
+```
+
 ### Links
 https://medium.com/@aliabdelaal/telegram-bot-tutorial-using-python-and-flask-1fc634da9522
 https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions-%E2%80%93-Your-first-Bot
