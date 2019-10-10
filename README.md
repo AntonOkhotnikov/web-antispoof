@@ -28,6 +28,17 @@ Web-service for antispoofing detection
     python3 inference.py
 ```
 
+* To run remote API:
+```bash
+    # on a remote machine
+    python3 api_remote.py
+
+    # to make a request from the same machine
+    python3 test_request.py
+
+    # to make a remote request change the "url" variable in test_request.py
+```
+
 ## Build
 * Before building copy the model to `data/model`:
 ```bash
@@ -46,6 +57,11 @@ Web-service for antispoofing detection
     docker run -v <host_machine_path>:/opt/audio web-antispoof:latest
 ```
 
+* To run API:
+```bash
+    docker run web-antispoof:latest python3 api_remote.py
+```
+
 ### Links
-https://medium.com/@aliabdelaal/telegram-bot-tutorial-using-python-and-flask-1fc634da9522
-https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions-%E2%80%93-Your-first-Bot
+* https://medium.com/@aliabdelaal/telegram-bot-tutorial-using-python-and-flask-1fc634da9522
+* https://github.com/python-telegram-bot/python-telegram-bot/wiki/Extensions-%E2%80%93-Your-first-Bot
