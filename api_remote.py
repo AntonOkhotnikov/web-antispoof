@@ -49,7 +49,6 @@ class Prediction(Resource):
         global session, model
         K.clear_session()
         path_to_file = request.get_data()
-        print(path_to_file)
         with session.as_default():
             with session.graph.as_default():
                 y_pred = test_pred(model, path_to_file, url=False, from_bytes=True)
@@ -63,4 +62,5 @@ api.add_resource(Prediction, '/predict')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)  # port 5000 is default
+    # set debug=True to see errors messages
+    app.run(debug=False, host='0.0.0.0', port=5000)  # port 5000 is default

@@ -54,12 +54,13 @@ Web-service for antispoofing detection
 ## Deploy
 * To start bot-server we need to mount a folder to `/opt/audio` in container, where downloads will be stored:
 ```bash
-    docker run -v <host_machine_path>:/opt/audio web-antispoof:latest
+    docker run --rm -v <host_machine_path>:/opt/audio web-antispoof:latest
 ```
 
 * To run API:
 ```bash
-    docker run web-antispoof:latest python3 api_remote.py
+    # select another port if it is not 5000
+    docker run --rm -p 5000:5000 web-antispoof:latest python3 api_remote.py
 ```
 
 ### Links
