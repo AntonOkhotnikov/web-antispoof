@@ -51,9 +51,27 @@ def get_feature_from_url(wav_path, length=102800, random_start=False):
         return None
 
 
-def test_pred(model, filepath, url=False):
+def get_feature_from_bytes(bytes_string, length=102800, random_start=False):
+    try:
+        x, sr = librosa.core.load(io.BytesIO(bytes_string), sr=16000)
+        # x, sr = sf.read(bytes_string, samplerate=16000)
+        assert sr == 16000
+        if length > len(x):
+            x = np.concatenate([x] * int(np.ceil(length/len(x))))
+        if random_start:
+            x = x[random.randint(0, len(x) - length):]
+        feature = x[:length]
+        return feature / np.max(np.abs(feature))
+    except Exception as e:
+        print("Error with getting feature from bytes string: %s" % (str(e)))
+        return None
+
+
+def test_pred(model, filepath, url=False, from_bytes=False):
     if url:
         feature = get_feature_from_url(filepath, length=102800, random_start=True)
+    elif from_bytes:
+        feature = get_feature_from_bytes(filepath, length=102800, random_start=True)
     else:
         feature = get_feature(filepath, length=102800, random_start=True)
     transfeat = feature[np.newaxis, ..., np.newaxis]
