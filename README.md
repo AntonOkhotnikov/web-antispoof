@@ -40,12 +40,6 @@ Web-service for antispoofing detection
 ```
 
 ## Build
-* Before building copy the model to `data/model`:
-```bash
-    cd web-antispoof/
-    cp <model_path> data/model/model.h5
-```
-
 * To build Docker image:
 ```bash
     docker build -t web-antispoof:latest .
