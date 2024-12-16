@@ -9,9 +9,19 @@ Web-service for antispoofing detection
 * `example.py` - Telegram bot example
 
 ## Example usage
+* Configure two variables in `bot.py` first:
+```bash
+    # Telegram bot token
+    TOKEN = '<YOUR_TELEGRAM_BOT_TOKEN_GOES_HERE>'
+
+    # proxy server
+    REQUEST_KWARGS = {
+        'proxy_url': 'http://USERNAME:PASSWORD@YOUR_IP_ADDRESS:PORT',
+}
+```
+
 * To run bot:
 ```bash
-    export https_proxy=...
     python3 bot.py
 ```
 
